@@ -48,14 +48,14 @@ func merge(left []int, right []int) []int {
 	}
 
 	if i < l {
-		for i<l {
+		for i < l {
 			ret[i+j] = left[i]
 			i++
 		}
 	}
 
 	if j < r {
-		for j<r {
+		for j < r {
 			ret[i+j] = right[j]
 			j++
 		}
@@ -78,5 +78,5 @@ func Merge(list []int) []int {
 }
 
 func main() {
-	fmt.Println(Merge([]int{3,1,19,-9,22}))
+	fmt.Println(Merge([]int{3, 1, 19, -9, 22}))
 }

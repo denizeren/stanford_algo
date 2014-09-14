@@ -1,7 +1,5 @@
 package sort
 
-import "fmt"
-
 func Bubble(list []int) []int {
 	s := len(list)
 	for s != 0 {
@@ -75,8 +73,4 @@ func Merge(list []int) []int {
 	right := Merge(list[s/2:])
 
 	return merge(left, right)
-}
-
-func main() {
-	fmt.Println(Merge([]int{3, 1, 19, -9, 22}))
 }

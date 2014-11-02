@@ -79,3 +79,18 @@ func TestMerge(t *testing.T) {
 		}
 	}
 }
+
+func TestQuick(t *testing.T) {
+	for _, pair := range tests {
+		unsorted := make([]int, len(pair.unsorted))
+		copy(unsorted, pair.unsorted)
+		Quick(unsorted)
+		if !testSliceEq(unsorted, pair.sorted) {
+			t.Error(
+				"For", pair.unsorted,
+				"expected", pair.sorted,
+				"got", unsorted,
+			)
+		}
+	}
+}

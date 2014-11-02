@@ -74,3 +74,25 @@ func Merge(list []int) []int {
 
 	return merge(left, right)
 }
+
+func Quick(list []int) {
+	if len(list) <= 1 {
+		return
+	}
+
+	pivot := list[0]
+
+	i := 1
+
+	for j := 1; j<len(list); j++ {
+		if list[j] < pivot {
+			list[i], list[j] = list[j], list[i]
+			i++
+		}
+	}
+
+	list[0], list[i-1] = list[i-1], list[0]
+
+	Quick(list[:i-1])
+	Quick(list[i:])
+}

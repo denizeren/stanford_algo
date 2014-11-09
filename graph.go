@@ -1,10 +1,9 @@
-package main
+package graph
 
 import (
 	"math/rand"
 	"strings"
 	"bufio"
-	"fmt"
 	"os"
     "time"
 )
@@ -128,19 +127,4 @@ func MinCut(vertices []*Vertice, edges []*Edge) int {
 	}
 
 	return len(edges)
-}
-
-func main() {
-	lines, _ := ReadLines("/tmp/kargerMinCut.txt")
-
-	min := 999
-	for i:=0; i<1000; i++ {
-		vertices, edges := CreateGraph(lines)
-		tmp := MinCut(vertices, edges)
-		if tmp < min {
-			min = tmp
-		}
-	}
-
-	fmt.Println(min)
 }

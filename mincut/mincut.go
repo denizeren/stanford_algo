@@ -1,4 +1,4 @@
-package graph
+package mincut
 
 import (
 	"math/rand"

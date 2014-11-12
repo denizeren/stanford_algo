@@ -5,6 +5,47 @@ type Graph struct {
 	nodes []*Node
 }
 
+func (g *Graph) AddNode(n *Node) {
+	g.nodes = append(g.nodes, n)
+}
+
+func (f *Graph) AddEdges(x *Node, y *Node) {
+	x.AddAdjecent(y)
+	y.AddAdjecent(x)
+}
+
+func (f *Graph) BFS(node *Node) {
+	q := Queue{}
+	q.Push(node)
+	node.SetVisited()
+
+	for len(q.data) > 0 {
+		n := q.Pop()
+		for _, x := range n.adjacents {
+			if x.Visited() == false {
+				x.SetVisited()
+				q.Push(x)
+			}
+		}
+	}
+}
+
+func (f *Graph) DFS(node *Node) {
+	s := Stack{}
+	s.Push(node)
+	node.SetVisited()
+
+	for len(s.data) > 0 {
+		n := s.Pop()
+		for _, x := range n.adjacents {
+			if x.Visited() == false {
+				x.SetVisited()
+				s.Push(x)
+			}
+		}
+	}
+}
+
 type Node struct {
 	value     int
 	visited   bool
@@ -13,6 +54,7 @@ type Node struct {
 
 func (n *Node) Equals(node *Node) bool {
 	if n.value == node.value && n.visited == node.visited {
+		// TODO check when order is different
 		for k, v := range n.adjacents {
 			if v != node.adjacents[k] {
 				return false
@@ -22,6 +64,18 @@ func (n *Node) Equals(node *Node) bool {
 	}
 
 	return false
+}
+
+func (n *Node) AddAdjecent(node *Node) {
+	n.adjacents = append(n.adjacents, node)
+}
+
+func (n *Node) Visited() bool {
+	return n.visited
+}
+
+func (n *Node) SetVisited() {
+	n.visited = true
 }
 
 // Queue implementation

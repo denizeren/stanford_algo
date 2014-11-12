@@ -2,4 +2,5 @@ language: go
 
 script:
  - cd sort;go test -v
+ - cd ../mincut;go test -v
  - cd ../graph;go test -v

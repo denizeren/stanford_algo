@@ -84,7 +84,7 @@ func Quick(list []int) {
 
 	i := 1
 
-	for j := 1; j<len(list); j++ {
+	for j := 1; j < len(list); j++ {
 		if list[j] < pivot {
 			list[i], list[j] = list[j], list[i]
 			i++

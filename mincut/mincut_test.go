@@ -1,8 +1,8 @@
 package mincut
 
 import (
-	"testing"
 	"strconv"
+	"testing"
 )
 
 func testVerticeEq(a, b []*Vertice) bool {
@@ -44,7 +44,7 @@ func TestCreateGraph(t *testing.T) {
 		"7 3 4 8",
 		"8 3 4 7",
 	}
-	vertices := []*Vertice {
+	vertices := []*Vertice{
 		&Vertice{"1"},
 		&Vertice{"2"},
 		&Vertice{"3"},
@@ -54,19 +54,19 @@ func TestCreateGraph(t *testing.T) {
 		&Vertice{"7"},
 		&Vertice{"8"},
 	}
-	edges := []*Edge {
-		&Edge{"2", "1"} ,
-		&Edge{"4", "3"} ,
-		&Edge{"5", "1"} ,
-		&Edge{"5", "2"} ,
-		&Edge{"6", "1"} ,
-		&Edge{"6", "2"} ,
-		&Edge{"6", "5"} ,
-		&Edge{"7", "3"} ,
-		&Edge{"7", "4"} ,
-		&Edge{"8", "3"} ,
-		&Edge{"8", "4"} ,
-		&Edge{"8", "7"} ,
+	edges := []*Edge{
+		&Edge{"2", "1"},
+		&Edge{"4", "3"},
+		&Edge{"5", "1"},
+		&Edge{"5", "2"},
+		&Edge{"6", "1"},
+		&Edge{"6", "2"},
+		&Edge{"6", "5"},
+		&Edge{"7", "3"},
+		&Edge{"7", "4"},
+		&Edge{"8", "3"},
+		&Edge{"8", "4"},
+		&Edge{"8", "7"},
 	}
 
 	v, e := CreateGraph(lines)
@@ -99,7 +99,7 @@ func TestMincut(t *testing.T) {
 	}
 
 	min := 999
-	for i:=0; i<1000; i++ {
+	for i := 0; i < 1000; i++ {
 		vertices, edges := CreateGraph(lines)
 		tmp := MinCut(vertices, edges)
 		if tmp < min {

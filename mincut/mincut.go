@@ -1,11 +1,11 @@
 package mincut
 
 import (
-	"math/rand"
-	"strings"
 	"bufio"
+	"math/rand"
 	"os"
-    "time"
+	"strings"
+	"time"
 )
 
 type Vertice struct {
@@ -53,7 +53,7 @@ func CreateGraph(lines []string) ([]*Vertice, []*Edge) {
 		vertices = append(vertices, v)
 		addedVertices[v.Name] = 1
 
-		for i:=1; i<len(words); i++ {
+		for i := 1; i < len(words); i++ {
 			// Since graph is unidirected check it
 			// TODO convert vertices slice to map that would be a smarter move
 			_, ok := addedVertices[words[i]]
@@ -73,8 +73,8 @@ func CreateGraph(lines []string) ([]*Vertice, []*Edge) {
 }
 
 func random(length int) int {
-	rand.Seed(time.Now().Unix()+rand.Int63n(1000))
-    return rand.Intn(length)
+	rand.Seed(time.Now().Unix() + rand.Int63n(1000))
+	return rand.Intn(length)
 }
 
 func contract(randEdgeIndex int, vertices []*Vertice, edges []*Edge) ([]*Vertice, []*Edge) {
@@ -122,7 +122,7 @@ func contract(randEdgeIndex int, vertices []*Vertice, edges []*Edge) ([]*Vertice
 func MinCut(vertices []*Vertice, edges []*Edge) int {
 	for len(vertices) > 2 {
 		// Randomly select edge
-		randEdgeIndex := random(len(edges)-1)
+		randEdgeIndex := random(len(edges) - 1)
 		vertices, edges = contract(randEdgeIndex, vertices, edges)
 	}
 

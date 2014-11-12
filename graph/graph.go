@@ -6,8 +6,8 @@ type Graph struct {
 }
 
 type Node struct {
-	value int
-	visited bool
+	value     int
+	visited   bool
 	adjacents []*Node
 }
 

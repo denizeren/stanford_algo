@@ -1,12 +1,12 @@
 package graph
 
 import (
-	"testing"
 	"strconv"
+	"testing"
 )
 
 func TestQueue(t *testing.T) {
-	nodes := []*Node {
+	nodes := []*Node{
 		&Node{1, false, nil},
 		&Node{2, false, nil},
 		&Node{3, false, nil},
@@ -33,7 +33,7 @@ func TestQueue(t *testing.T) {
 }
 
 func TestStack(t *testing.T) {
-	nodes := []*Node {
+	nodes := []*Node{
 		&Node{1, false, nil},
 		&Node{2, false, nil},
 		&Node{3, false, nil},
@@ -45,7 +45,7 @@ func TestStack(t *testing.T) {
 		s.Push(v)
 	}
 
-	for i:=len(nodes)-1; i>=0; i--{
+	for i := len(nodes) - 1; i >= 0; i-- {
 		n := s.Pop()
 
 		if n.Equals(nodes[i]) == false {

@@ -2,6 +2,8 @@ package sort
 
 import "testing"
 
+type IntSlice []int
+
 type testpair struct {
 	unsorted []int
 	sorted   []int
@@ -21,6 +23,22 @@ var tests = []testpair{
 	{[]int{5, 6, 7, 1, 2, 3, 4}, []int{1, 2, 3, 4, 5, 6, 7}},
 }
 
+func (list IntSlice) Less(i, j int) bool {
+	if list[i] < list[j] {
+		return true
+	} else {
+		return false
+	}
+}
+
+func (list IntSlice) Len() int {
+	return len(list)
+}
+
+func (list IntSlice) Swap(i, j int) {
+	list[i], list[j] = list[j], list[i]
+}
+
 func testSliceEq(a, b []int) bool {
 	if len(a) != len(b) {
 		return false
@@ -37,14 +55,14 @@ func testSliceEq(a, b []int) bool {
 
 func TestBubble(t *testing.T) {
 	for _, pair := range tests {
-		unsorted := make([]int, len(pair.unsorted))
+		unsorted := make(IntSlice, len(pair.unsorted))
 		copy(unsorted, pair.unsorted)
-		v := Bubble(unsorted)
-		if !testSliceEq(v, pair.sorted) {
+		Bubble(unsorted)
+		if !testSliceEq(unsorted, pair.sorted) {
 			t.Error(
 				"For", pair.unsorted,
 				"expected", pair.sorted,
-				"got", v,
+				"got", unsorted,
 			)
 		}
 	}
@@ -52,14 +70,14 @@ func TestBubble(t *testing.T) {
 
 func TestSelection(t *testing.T) {
 	for _, pair := range tests {
-		unsorted := make([]int, len(pair.unsorted))
+		unsorted := make(IntSlice, len(pair.unsorted))
 		copy(unsorted, pair.unsorted)
-		v := Selection(unsorted)
-		if !testSliceEq(v, pair.sorted) {
+		Selection(unsorted)
+		if !testSliceEq(unsorted, pair.sorted) {
 			t.Error(
 				"For", pair.unsorted,
 				"expected", pair.sorted,
-				"got", v,
+				"got", unsorted,
 			)
 		}
 	}
@@ -82,9 +100,9 @@ func TestMerge(t *testing.T) {
 
 func TestQuick(t *testing.T) {
 	for _, pair := range tests {
-		unsorted := make([]int, len(pair.unsorted))
+		unsorted := make(IntSlice, len(pair.unsorted))
 		copy(unsorted, pair.unsorted)
-		Quick(unsorted)
+		Quick(unsorted, 0, unsorted.Len())
 		if !testSliceEq(unsorted, pair.sorted) {
 			t.Error(
 				"For", pair.unsorted,

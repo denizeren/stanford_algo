@@ -1,34 +1,36 @@
 package sort
 
-func Bubble(list []int) []int {
-	s := len(list)
+type Interface interface {
+	Len() int
+	Less(i, j int) bool
+	Swap(i, j int)
+}
+
+func Bubble(data Interface) {
+	s := data.Len()
 	for s != 0 {
 		n := 0
 		for i := 1; i < s; i++ {
-			if list[i-1] > list[i] {
-				list[i-1], list[i] = list[i], list[i-1]
+			if data.Less(i, i-1) {
+				data.Swap(i, i-1)
 				n = i
 			}
 		}
 		s = n
 	}
-
-	return list
 }
 
-func Selection(list []int) []int {
-	for i := 1; i < len(list); i++ {
-		for j := i; j < len(list); j++ {
-			if list[j] < list[i-1] {
-				list[i-1], list[j] = list[j], list[i-1]
+func Selection(data Interface) {
+	for i := 1; i < data.Len(); i++ {
+		for j := i; j < data.Len(); j++ {
+			if data.Less(j, i-1) {
+				data.Swap(i-1, j)
 			}
 		}
 	}
-
-	return list
 }
 
-func merge(left []int, right []int) []int {
+func merge(left, right []int) []int {
 	i := 0
 	j := 0
 	l := len(left)
@@ -75,24 +77,24 @@ func Merge(list []int) []int {
 	return merge(left, right)
 }
 
-func Quick(list []int) {
-	if len(list) <= 1 {
+func Quick(data Interface, s int, e int) {
+	if e-s <= 1 {
 		return
 	}
 
-	pivot := list[0]
+	pivot := s
 
-	i := 1
+	i := s+1
 
-	for j := 1; j < len(list); j++ {
-		if list[j] < pivot {
-			list[i], list[j] = list[j], list[i]
+	for j := s+1; j < e; j++ {
+		if data.Less(j, pivot) {
+			data.Swap(i, j)
 			i++
 		}
 	}
 
-	list[0], list[i-1] = list[i-1], list[0]
+	data.Swap(pivot, i-1)
 
-	Quick(list[:i-1])
-	Quick(list[i:])
+	Quick(data, s, i-1)
+	Quick(data, i, e)
 }
